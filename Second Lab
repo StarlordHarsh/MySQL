@@ -1,0 +1,546 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.11 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create table manage(id int, name varchar(20),city varchar(20), Dept varchar(20), primary key(id));
+ERROR 1046 (3D000): No database selected
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| aamir              |
+| anish              |
+| information_schema |
+| itbdb              |
+| mysql              |
+| nitin              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.00 sec)
+
+mysql> create harsh
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'harsh' at line 1
+mysql> create databse harsh;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databse harsh' at line 1
+mysql> create database harsh;
+Query OK, 1 row affected (0.23 sec)
+
+mysql> use harsh;
+Database changed
+mysql> create table manage(id int, name varchar(20),city varchar(20), Dept varchar(20), primary key(id));
+Query OK, 0 rows affected (0.50 sec)
+
+mysql> insert into manage values(1,"Harsh","Yogi ka sheher","CS");
+Query OK, 1 row affected (0.21 sec)
+
+mysql> show * from values;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from values' at line 1
+mysql> show * from manage;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from manage' at line 1
+mysql> select * from manage;
++----+-------+----------------+------+
+| id | name  | city           | Dept |
++----+-------+----------------+------+
+|  1 | Harsh | Yogi ka sheher | CS   |
++----+-------+----------------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into manage values(2,"Random Stranger 2","Yogi ka sheher","IT");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into manage values(3,"Random Stranger 3","Yogi ka sheher","Mech");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into manage values(4,"Random Stranger 4","Yogi ka sheher","Civil");
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into manage values(5,"Random Stranger 5","Yogi ka sheher","HR");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from manage;
++----+-------------------+----------------+-------+
+| id | name              | city           | Dept  |
++----+-------------------+----------------+-------+
+|  1 | Harsh             | Yogi ka sheher | CS    |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |
++----+-------------------+----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update manage set name="Random Stranger 1" where Dept="CS";
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from manage;
++----+-------------------+----------------+-------+
+| id | name              | city           | Dept  |
++----+-------------------+----------------+-------+
+|  1 | Random Stranger 1 | Yogi ka sheher | CS    |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |
++----+-------------------+----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table manage name varchar(10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name varchar(10)' at line 1
+mysql> alter table manage modify name varchar(10);
+ERROR 1265 (01000): Data truncated for column 'name' at row 1
+mysql> select * from manage;
++----+-------------------+----------------+-------+
+| id | name              | city           | Dept  |
++----+-------------------+----------------+-------+
+|  1 | Random Stranger 1 | Yogi ka sheher | CS    |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |
++----+-------------------+----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into manage values(6,"Random Stranger 5","Yogi ka sheher","HR");
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select * from manage;
++----+-------------------+----------------+-------+
+| id | name              | city           | Dept  |
++----+-------------------+----------------+-------+
+|  1 | Random Stranger 1 | Yogi ka sheher | CS    |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |
+|  6 | Random Stranger 5 | Yogi ka sheher | HR    |
++----+-------------------+----------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table manage modify name varchar(1);
+ERROR 1265 (01000): Data truncated for column 'name' at row 1
+mysql> select * from manage;
++----+-------------------+----------------+-------+
+| id | name              | city           | Dept  |
++----+-------------------+----------------+-------+
+|  1 | Random Stranger 1 | Yogi ka sheher | CS    |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |
+|  6 | Random Stranger 5 | Yogi ka sheher | HR    |
++----+-------------------+----------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into manage values(7,"Loooooooooooooooooooooooooooooooooooooooooooonnnnnnnnnnnggggggggggg","Yogi ka sheher","HR");
+ERROR 1406 (22001): Data too long for column 'name' at row 1
+mysql> insert into manage values(7,"Loooooooooooooonnnnnnnnnnggggggggggg","Yogi ka sheher","HR");
+ERROR 1406 (22001): Data too long for column 'name' at row 1
+mysql> insert into manage values(7,"Loooooooonnnnnnnnggggggggggg","Yogi ka sheher","HR");
+ERROR 1406 (22001): Data too long for column 'name' at row 1
+mysql> insert into manage values(7,"Loooonnnnnnggggg","Yogi ka sheher","HR");
+Query OK, 1 row affected (0.15 sec)
+
+mysql> select * from manage;
++----+-------------------+----------------+-------+
+| id | name              | city           | Dept  |
++----+-------------------+----------------+-------+
+|  1 | Random Stranger 1 | Yogi ka sheher | CS    |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |
+|  6 | Random Stranger 5 | Yogi ka sheher | HR    |
+|  7 | Loooonnnnnnggggg  | Yogi ka sheher | HR    |
++----+-------------------+----------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc manage;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
+| Dept  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+mysql> alter table manage drop primary key id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'id' at line 1
+mysql> alter table manage drop primary key(id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(id)' at line 1
+mysql> alter table manage drop primary key;
+Query OK, 7 rows affected (1.18 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> alter table manage add primary key(mName)
+    -> ;
+ERROR 1072 (42000): Key column 'mName' doesn't exist in table
+mysql> alter table manage add primary key(name)
+    -> ;
+ERROR 1062 (23000): Duplicate entry 'Random Stranger 5' for key 'PRIMARY'
+mysql> update manage set name="Random Stranger 6" where id=6;
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from manage;
++----+-------------------+----------------+-------+
+| id | name              | city           | Dept  |
++----+-------------------+----------------+-------+
+|  1 | Random Stranger 1 | Yogi ka sheher | CS    |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |
+|  6 | Random Stranger 6 | Yogi ka sheher | HR    |
+|  7 | Loooonnnnnnggggg  | Yogi ka sheher | HR    |
++----+-------------------+----------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> alter table manage add primary key(name);
+Query OK, 0 rows affected (0.90 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table manage drop primary key;
+Query OK, 7 rows affected (0.83 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> alter table manage add primary key(name, id)
+    -> ;
+Query OK, 0 rows affected (0.79 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc manage;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | NO   | PRI | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
+| Dept  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> alter table manage add column paisa int;
+Query OK, 0 rows affected (0.93 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from manage;
++----+-------------------+----------------+-------+-------+
+| id | name              | city           | Dept  | paisa |
++----+-------------------+----------------+-------+-------+
+|  7 | Loooonnnnnnggggg  | Yogi ka sheher | HR    |  NULL |
+|  1 | Random Stranger 1 | Yogi ka sheher | CS    |  NULL |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |  NULL |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |  NULL |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |  NULL |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |  NULL |
+|  6 | Random Stranger 6 | Yogi ka sheher | HR    |  NULL |
++----+-------------------+----------------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update manage set paisa=1000 where id=1;
+Query OK, 1 row affected (0.14 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update manage set paisa=1050 where id=2;
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update manage set paisa=1450 where id=3;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update manage set paisa=1150 where id=4;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update manage set paisa=1900 where id=5;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from manage;
++----+-------------------+----------------+-------+-------+
+| id | name              | city           | Dept  | paisa |
++----+-------------------+----------------+-------+-------+
+|  7 | Loooonnnnnnggggg  | Yogi ka sheher | HR    |  NULL |
+|  1 | Random Stranger 1 | Yogi ka sheher | CS    |  1000 |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |  1050 |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |  1450 |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |  1150 |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |  1900 |
+|  6 | Random Stranger 6 | Yogi ka sheher | HR    |  NULL |
++----+-------------------+----------------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from manage orderby id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'id' at line 1
+mysql> select * from manage order by id;
++----+-------------------+----------------+-------+-------+
+| id | name              | city           | Dept  | paisa |
++----+-------------------+----------------+-------+-------+
+|  1 | Random Stranger 1 | Yogi ka sheher | CS    |  1000 |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |  1050 |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |  1450 |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |  1150 |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |  1900 |
+|  6 | Random Stranger 6 | Yogi ka sheher | HR    |  NULL |
+|  7 | Loooonnnnnnggggg  | Yogi ka sheher | HR    |  NULL |
++----+-------------------+----------------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from manage;
++----+-------------------+----------------+-------+-------+
+| id | name              | city           | Dept  | paisa |
++----+-------------------+----------------+-------+-------+
+|  7 | Loooonnnnnnggggg  | Yogi ka sheher | HR    |  NULL |
+|  1 | Random Stranger 1 | Yogi ka sheher | CS    |  1000 |
+|  2 | Random Stranger 2 | Yogi ka sheher | IT    |  1050 |
+|  3 | Random Stranger 3 | Yogi ka sheher | Mech  |  1450 |
+|  4 | Random Stranger 4 | Yogi ka sheher | Civil |  1150 |
+|  5 | Random Stranger 5 | Yogi ka sheher | HR    |  1900 |
+|  6 | Random Stranger 6 | Yogi ka sheher | HR    |  NULL |
++----+-------------------+----------------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update manage set name="Random Stranger 10" where id=3;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from manage;
++----+--------------------+----------------+-------+-------+
+| id | name               | city           | Dept  | paisa |
++----+--------------------+----------------+-------+-------+
+|  7 | Loooonnnnnnggggg   | Yogi ka sheher | HR    |  NULL |
+|  1 | Random Stranger 1  | Yogi ka sheher | CS    |  1000 |
+|  3 | Random Stranger 10 | Yogi ka sheher | Mech  |  1450 |
+|  2 | Random Stranger 2  | Yogi ka sheher | IT    |  1050 |
+|  4 | Random Stranger 4  | Yogi ka sheher | Civil |  1150 |
+|  5 | Random Stranger 5  | Yogi ka sheher | HR    |  1900 |
+|  6 | Random Stranger 6  | Yogi ka sheher | HR    |  NULL |
++----+--------------------+----------------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update manage set paisa=1900 where id=5;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update manage set paisa=1900 where id=5;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from manage;
++----+--------------------+----------------+-------+-------+
+| id | name               | city           | Dept  | paisa |
++----+--------------------+----------------+-------+-------+
+|  7 | Loooonnnnnnggggg   | Yogi ka sheher | HR    |  NULL |
+|  1 | Random Stranger 1  | Yogi ka sheher | CS    |  1000 |
+|  3 | Random Stranger 10 | Yogi ka sheher | Mech  |  1450 |
+|  2 | Random Stranger 2  | Yogi ka sheher | IT    |  1050 |
+|  4 | Random Stranger 4  | Yogi ka sheher | Civil |  1150 |
+|  5 | Random Stranger 5  | Yogi ka sheher | HR    |  1900 |
+|  6 | Random Stranger 6  | Yogi ka sheher | HR    |  NULL |
++----+--------------------+----------------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update manage set paisa=9000 where dept="IT"&dept="CS";
+ERROR 1292 (22007): Truncated incorrect INTEGER value: 'IT'
+mysql> update manage set paisa=9000 where dept="IT" & dept="CS";
+ERROR 1292 (22007): Truncated incorrect INTEGER value: 'IT'
+mysql> update manage set paisa=9000 where dept="IT" and dept="CS";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from manage;
++----+--------------------+----------------+-------+-------+
+| id | name               | city           | Dept  | paisa |
++----+--------------------+----------------+-------+-------+
+|  7 | Loooonnnnnnggggg   | Yogi ka sheher | HR    |  NULL |
+|  1 | Random Stranger 1  | Yogi ka sheher | CS    |  1000 |
+|  3 | Random Stranger 10 | Yogi ka sheher | Mech  |  1450 |
+|  2 | Random Stranger 2  | Yogi ka sheher | IT    |  1050 |
+|  4 | Random Stranger 4  | Yogi ka sheher | Civil |  1150 |
+|  5 | Random Stranger 5  | Yogi ka sheher | HR    |  1900 |
+|  6 | Random Stranger 6  | Yogi ka sheher | HR    |  NULL |
++----+--------------------+----------------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update manage set paisa=9000 where dept="IT" or dept="CS";
+Query OK, 2 rows affected (0.07 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql>mysql> select * from all;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'all' at line 1
+mysql> select * from manager;;
+ERROR 1146 (42S02): Table 'harsh.manager' doesn't exist
+ERROR:
+No query specified
+
+mysql> select * from manager;
+ERROR 1146 (42S02): Table 'harsh.manager' doesn't exist
+mysql> desc manager;
+ERROR 1146 (42S02): Table 'harsh.manager' doesn't exist
+mysql> desc manage;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int(11)     | NO   | PRI | NULL    |       |
+| name   | varchar(20) | NO   | PRI | NULL    |       |
+| city   | varchar(20) | YES  |     | NULL    |       |
+| Dept   | varchar(20) | YES  |     | NULL    |       |
+| Salary | int(11)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from manage;
++----+--------------------+----------------+-------+--------+
+| id | name               | city           | Dept  | Salary |
++----+--------------------+----------------+-------+--------+
+|  7 | Loooonnnnnnggggg   | Yogi ka sheher | HR    |   NULL |
+|  1 | Random Stranger 1  | Yogi ka sheher | CS    |   9000 |
+|  3 | Random Stranger 10 | Yogi ka sheher | Mech  |   1450 |
+|  2 | Random Stranger 2  | Yogi ka sheher | IT    |   9000 |
+|  4 | Random Stranger 4  | Yogi ka sheher | Civil |   1150 |
+|  5 | Random Stranger 5  | Yogi ka sheher | HR    |   1900 |
+|  6 | Random Stranger 6  | Yogi ka sheher | HR    |   NULL |
++----+--------------------+----------------+-------+--------+
+7 rows in set (0.00 sec)
+
+mysql> alter table manage rename to Manage;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>alter table manage rename to Manage;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from manage;
++----+--------------------+----------------+-------+--------+
+| id | name               | city           | Dept  | Salary |
++----+--------------------+----------------+-------+--------+
+|  7 | Loooonnnnnnggggg   | Yogi ka sheher | HR    |   NULL |
+|  1 | Random Stranger 1  | Yogi ka sheher | CS    |   9000 |
+|  3 | Random Stranger 10 | Yogi ka sheher | Mech  |   1450 |
+|  2 | Random Stranger 2  | Yogi ka sheher | IT    |   9000 |
+|  4 | Random Stranger 4  | Yogi ka sheher | Civil |   1150 |
+|  5 | Random Stranger 5  | Yogi ka sheher | HR    |   1900 |
+|  6 | Random Stranger 6  | Yogi ka sheher | HR    |   NULL |
++----+--------------------+----------------+-------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select * from Manage;
++----+--------------------+----------------+-------+--------+
+| id | name               | city           | Dept  | Salary |
++----+--------------------+----------------+-------+--------+
+|  7 | Loooonnnnnnggggg   | Yogi ka sheher | HR    |   NULL |
+|  1 | Random Stranger 1  | Yogi ka sheher | CS    |   9000 |
+|  3 | Random Stranger 10 | Yogi ka sheher | Mech  |   1450 |
+|  2 | Random Stranger 2  | Yogi ka sheher | IT    |   9000 |
+|  4 | Random Stranger 4  | Yogi ka sheher | Civil |   1150 |
+|  5 | Random Stranger 5  | Yogi ka sheher | HR    |   1900 |
+|  6 | Random Stranger 6  | Yogi ka sheher | HR    |   NULL |
++----+--------------------+----------------+-------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select * from MAnage;
++----+--------------------+----------------+-------+--------+
+| id | name               | city           | Dept  | Salary |
++----+--------------------+----------------+-------+--------+
+|  7 | Loooonnnnnnggggg   | Yogi ka sheher | HR    |   NULL |
+|  1 | Random Stranger 1  | Yogi ka sheher | CS    |   9000 |
+|  3 | Random Stranger 10 | Yogi ka sheher | Mech  |   1450 |
+|  2 | Random Stranger 2  | Yogi ka sheher | IT    |   9000 |
+|  4 | Random Stranger 4  | Yogi ka sheher | Civil |   1150 |
+|  5 | Random Stranger 5  | Yogi ka sheher | HR    |   1900 |
+|  6 | Random Stranger 6  | Yogi ka sheher | HR    |   NULL |
++----+--------------------+----------------+-------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select * from MANAGE;
++----+--------------------+----------------+-------+--------+
+| id | name               | city           | Dept  | Salary |
++----+--------------------+----------------+-------+--------+
+|  7 | Loooonnnnnnggggg   | Yogi ka sheher | HR    |   NULL |
+|  1 | Random Stranger 1  | Yogi ka sheher | CS    |   9000 |
+|  3 | Random Stranger 10 | Yogi ka sheher | Mech  |   1450 |
+|  2 | Random Stranger 2  | Yogi ka sheher | IT    |   9000 |
+|  4 | Random Stranger 4  | Yogi ka sheher | Civil |   1150 |
+|  5 | Random Stranger 5  | Yogi ka sheher | HR    |   1900 |
+|  6 | Random Stranger 6  | Yogi ka sheher | HR    |   NULL |
++----+--------------------+----------------+-------+--------+
+7 rows in set (0.00 sec)
+
+mysql> alter table manage rename to Manager;
+Query OK, 0 rows affected (0.39 sec)
+
+mysql> select * from MANAGE;
+ERROR 1146 (42S02): Table 'harsh.manage' doesn't exist
+mysql> select * from Manager;
++----+--------------------+----------------+-------+--------+
+| id | name               | city           | Dept  | Salary |
++----+--------------------+----------------+-------+--------+
+|  7 | Loooonnnnnnggggg   | Yogi ka sheher | HR    |   NULL |
+|  1 | Random Stranger 1  | Yogi ka sheher | CS    |   9000 |
+|  3 | Random Stranger 10 | Yogi ka sheher | Mech  |   1450 |
+|  2 | Random Stranger 2  | Yogi ka sheher | IT    |   9000 |
+|  4 | Random Stranger 4  | Yogi ka sheher | Civil |   1150 |
+|  5 | Random Stranger 5  | Yogi ka sheher | HR    |   1900 |
+|  6 | Random Stranger 6  | Yogi ka sheher | HR    |   NULL |
++----+--------------------+----------------+-------+--------+
+7 rows in set (0.03 sec)
+
+mysql>select min(salary) from Manager;
++-------------+
+| min(salary) |
++-------------+
+|        1150 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from Manager;
++-------------+
+| max(salary) |
++-------------+
+|        9000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from Manager;
++-------------+
+| avg(salary) |
++-------------+
+|   4500.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(salary) from Manager;
++---------------+
+| count(salary) |
++---------------+
+|             5 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select name,id from manager where salary > (select avg(salary) from manager);
++-------------------+----+
+| name              | id |
++-------------------+----+
+| Random Stranger 1 |  1 |
+| Random Stranger 2 |  2 |
++-------------------+----+
+2 rows in set (0.01 sec)
+
+mysql>
