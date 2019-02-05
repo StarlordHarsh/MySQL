@@ -1,0 +1,489 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16
+Server version: 8.0.11 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show dtatabases
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dtatabases' at line 1
+mysql> show dtatabasses;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dtatabasses' at line 1
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| akshat             |
+| information_schema |
+| lib                |
+| maanas             |
+| mysql              |
++--------------------+
+5 rows in set (0.19 sec)
+
+mysql> use mysql
+Database changed
+mysql> select * from mysql;
+ERROR 1146 (42S02): Table 'mysql.mysql' doesn't exist
+mysql> create table empl(
+    -> empid int primary key,
+    -> empdpt varchar(40),
+    -> ename varchar(40),
+    -> city varchar(40));
+Query OK, 0 rows affected (0.65 sec)
+
+mysql> insert into empl values(1,"CSE","Harsh","Dehradun");
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into empl values(1,"CSE","Yash","Dehradun");
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+mysql> insert into empl values(2,"CSE","Yash","Dehradun");
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into empl values(3,"CSE","Divyam","Dehradun");
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into empl values(3,"CSE","Sachin","Dehradun");
+ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+mysql> insert into empl values(4,"CSE","Sachin","Dehradun");
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into empl values(5,"CSE","Anish","Dehradun");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into empl values(6,"CSE","Chacha","Dehradun");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into empl values(7,"CSE","Chachi","Dehradun");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into empl values(8,"CSE","Tejas","Dehradun");
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into empl values(9,"CSE","Devansh","Dehradun");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into empl values(10,"CSE","Hardik","Dehradun");
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from empl;
++-------+--------+---------+----------+
+| empid | empdpt | ename   | city     |
++-------+--------+---------+----------+
+|     1 | CSE    | Harsh   | Dehradun |
+|     2 | CSE    | Yash    | Dehradun |
+|     3 | CSE    | Divyam  | Dehradun |
+|     4 | CSE    | Sachin  | Dehradun |
+|     5 | CSE    | Anish   | Dehradun |
+|     6 | CSE    | Chacha  | Dehradun |
+|     7 | CSE    | Chachi  | Dehradun |
+|     8 | CSE    | Tejas   | Dehradun |
+|     9 | CSE    | Devansh | Dehradun |
+|    10 | CSE    | Hardik  | Dehradun |
++-------+--------+---------+----------+
+10 rows in set (0.00 sec)
+
+mysql> desc empl;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| empid  | int(11)     | NO   | PRI | NULL    |       |
+| empdpt | varchar(40) | YES  |     | NULL    |       |
+| ename  | varchar(40) | YES  |     | NULL    |       |
+| city   | varchar(40) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+mysql> alter table empl add salary int;
+Query OK, 0 rows affected (1.29 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from empl;
++-------+--------+---------+----------+--------+
+| empid | empdpt | ename   | city     | salary |
++-------+--------+---------+----------+--------+
+|     1 | CSE    | Harsh   | Dehradun |   NULL |
+|     2 | CSE    | Yash    | Dehradun |   NULL |
+|     3 | CSE    | Divyam  | Dehradun |   NULL |
+|     4 | CSE    | Sachin  | Dehradun |   NULL |
+|     5 | CSE    | Anish   | Dehradun |   NULL |
+|     6 | CSE    | Chacha  | Dehradun |   NULL |
+|     7 | CSE    | Chachi  | Dehradun |   NULL |
+|     8 | CSE    | Tejas   | Dehradun |   NULL |
+|     9 | CSE    | Devansh | Dehradun |   NULL |
+|    10 | CSE    | Hardik  | Dehradun |   NULL |
++-------+--------+---------+----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> set salary=10000 where empdpt="CSE";
+ERROR 1193 (HY000): Unknown system variable 'salary'
+mysql> update empl set salary=10000 where empdpt="CSE";
+Query OK, 10 rows affected (0.07 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+mysql> select * from empl;
++-------+--------+---------+----------+--------+
+| empid | empdpt | ename   | city     | salary |
++-------+--------+---------+----------+--------+
+|     1 | CSE    | Harsh   | Dehradun |  10000 |
+|     2 | CSE    | Yash    | Dehradun |  10000 |
+|     3 | CSE    | Divyam  | Dehradun |  10000 |
+|     4 | CSE    | Sachin  | Dehradun |  10000 |
+|     5 | CSE    | Anish   | Dehradun |  10000 |
+|     6 | CSE    | Chacha  | Dehradun |  10000 |
+|     7 | CSE    | Chachi  | Dehradun |  10000 |
+|     8 | CSE    | Tejas   | Dehradun |  10000 |
+|     9 | CSE    | Devansh | Dehradun |  10000 |
+|    10 | CSE    | Hardik  | Dehradun |  10000 |
++-------+--------+---------+----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> update empl set salary=12000,empdpt="IT" where empid=4 or empid=5;
+Query OK, 2 rows affected (0.06 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from empl;
++-------+--------+---------+----------+--------+
+| empid | empdpt | ename   | city     | salary |
++-------+--------+---------+----------+--------+
+|     1 | CSE    | Harsh   | Dehradun |  10000 |
+|     2 | CSE    | Yash    | Dehradun |  10000 |
+|     3 | CSE    | Divyam  | Dehradun |  10000 |
+|     4 | IT     | Sachin  | Dehradun |  12000 |
+|     5 | IT     | Anish   | Dehradun |  12000 |
+|     6 | CSE    | Chacha  | Dehradun |  10000 |
+|     7 | CSE    | Chachi  | Dehradun |  10000 |
+|     8 | CSE    | Tejas   | Dehradun |  10000 |
+|     9 | CSE    | Devansh | Dehradun |  10000 |
+|    10 | CSE    | Hardik  | Dehradun |  10000 |
++-------+--------+---------+----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> update empl set salary=12000,empdpt="Mech" where empid=7 or empid=8 or empid=6;
+Query OK, 3 rows affected (0.06 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update empl set salary=60000,empdpt="Mech" where empid=7 or empid=8 or empid=6;
+Query OK, 3 rows affected (0.11 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update empl set salary=50000,empdpt="CSE" where empid=1 or empid=2;
+Query OK, 2 rows affected (0.13 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from empl;
++-------+--------+---------+----------+--------+
+| empid | empdpt | ename   | city     | salary |
++-------+--------+---------+----------+--------+
+|     1 | CSE    | Harsh   | Dehradun |  50000 |
+|     2 | CSE    | Yash    | Dehradun |  50000 |
+|     3 | CSE    | Divyam  | Dehradun |  10000 |
+|     4 | IT     | Sachin  | Dehradun |  12000 |
+|     5 | IT     | Anish   | Dehradun |  12000 |
+|     6 | Mech   | Chacha  | Dehradun |  60000 |
+|     7 | Mech   | Chachi  | Dehradun |  60000 |
+|     8 | Mech   | Tejas   | Dehradun |  60000 |
+|     9 | CSE    | Devansh | Dehradun |  10000 |
+|    10 | CSE    | Hardik  | Dehradun |  10000 |
++-------+--------+---------+----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> update empl set salary=50000,empdpt="CSE" where empid=3;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update empl set salary=55000,empdpt="Civil" where empid=9 or empid=10;
+Query OK, 2 rows affected (0.11 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from empl;
++-------+--------+---------+----------+--------+
+| empid | empdpt | ename   | city     | salary |
++-------+--------+---------+----------+--------+
+|     1 | CSE    | Harsh   | Dehradun |  50000 |
+|     2 | CSE    | Yash    | Dehradun |  50000 |
+|     3 | CSE    | Divyam  | Dehradun |  50000 |
+|     4 | IT     | Sachin  | Dehradun |  12000 |
+|     5 | IT     | Anish   | Dehradun |  12000 |
+|     6 | Mech   | Chacha  | Dehradun |  60000 |
+|     7 | Mech   | Chachi  | Dehradun |  60000 |
+|     8 | Mech   | Tejas   | Dehradun |  60000 |
+|     9 | Civil  | Devansh | Dehradun |  55000 |
+|    10 | Civil  | Hardik  | Dehradun |  55000 |
++-------+--------+---------+----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> update empl set salary=65000 where empdpt="IT";
+Query OK, 2 rows affected (0.14 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from empl;
++-------+--------+---------+----------+--------+
+| empid | empdpt | ename   | city     | salary |
++-------+--------+---------+----------+--------+
+|     1 | CSE    | Harsh   | Dehradun |  50000 |
+|     2 | CSE    | Yash    | Dehradun |  50000 |
+|     3 | CSE    | Divyam  | Dehradun |  50000 |
+|     4 | IT     | Sachin  | Dehradun |  65000 |
+|     5 | IT     | Anish   | Dehradun |  65000 |
+|     6 | Mech   | Chacha  | Dehradun |  60000 |
+|     7 | Mech   | Chachi  | Dehradun |  60000 |
+|     8 | Mech   | Tejas   | Dehradun |  60000 |
+|     9 | Civil  | Devansh | Dehradun |  55000 |
+|    10 | Civil  | Hardik  | Dehradun |  55000 |
++-------+--------+---------+----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select * from empl orderby salary;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'salary' at line 1
+mysql> select * from empl orderby(salary);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(salary)' at line 1
+mysql> select * from empl order by salary;
++-------+--------+---------+----------+--------+
+| empid | empdpt | ename   | city     | salary |
++-------+--------+---------+----------+--------+
+|     1 | CSE    | Harsh   | Dehradun |  50000 |
+|     2 | CSE    | Yash    | Dehradun |  50000 |
+|     3 | CSE    | Divyam  | Dehradun |  50000 |
+|     9 | Civil  | Devansh | Dehradun |  55000 |
+|    10 | Civil  | Hardik  | Dehradun |  55000 |
+|     6 | Mech   | Chacha  | Dehradun |  60000 |
+|     7 | Mech   | Chachi  | Dehradun |  60000 |
+|     8 | Mech   | Tejas   | Dehradun |  60000 |
+|     4 | IT     | Sachin  | Dehradun |  65000 |
+|     5 | IT     | Anish   | Dehradun |  65000 |
++-------+--------+---------+----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select sum(salary) from empl;
++-------------+
+| sum(salary) |
++-------------+
+|      570000 |
++-------------+
+1 row in set (0.02 sec)
+
+mysql> select avg(salary) from empl;
++-------------+
+| avg(salary) |
++-------------+
+|  57000.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from empl;
++-------------+
+| max(salary) |
++-------------+
+|       65000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select min(salary) from empl;
++-------------+
+| min(salary) |
++-------------+
+|       50000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from empl where salary>(select avg(salary) from empl );
++-------+--------+--------+----------+--------+
+| empid | empdpt | ename  | city     | salary |
++-------+--------+--------+----------+--------+
+|     4 | IT     | Sachin | Dehradun |  65000 |
+|     5 | IT     | Anish  | Dehradun |  65000 |
+|     6 | Mech   | Chacha | Dehradun |  60000 |
+|     7 | Mech   | Chachi | Dehradun |  60000 |
+|     8 | Mech   | Tejas  | Dehradun |  60000 |
++-------+--------+--------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> alter table empl drop primary key;
+Query OK, 10 rows affected (0.91 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table empl add primary key(empid,ename);
+Query OK, 0 rows affected (0.86 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc empl;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| empid  | int(11)     | NO   | PRI | NULL    |       |
+| empdpt | varchar(40) | YES  |     | NULL    |       |
+| ename  | varchar(40) | NO   | PRI | NULL    |       |
+| city   | varchar(40) | YES  |     | NULL    |       |
+| salary | int(11)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2019-02-05 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select yeardate();
+ERROR 1305 (42000): FUNCTION mysql.yeardate does not exist
+mysql> select year(curdate());
++-----------------+
+| year(curdate()) |
++-----------------+
+|            2019 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select month(curdate());
++------------------+
+| month(curdate()) |
++------------------+
+|                2 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> alter table empl add DOB date;
+Query OK, 0 rows affected (0.93 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update empl set dob="1998-01-10" where empname="harsh";
+ERROR 1054 (42S22): Unknown column 'empname' in 'where clause'
+mysql> update empl set dob="1998-01-10" where ename="harsh";
+Query OK, 1 row affected (0.14 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select year(curdate())-year(dob);
+ERROR 1054 (42S22): Unknown column 'dob' in 'field list'
+mysql> select year(curdate())-year(DOB);
+ERROR 1054 (42S22): Unknown column 'DOB' in 'field list'
+mysql> select year(curdate())-year(DOB) from empl;
++---------------------------+
+| year(curdate())-year(DOB) |
++---------------------------+
+|                        21 |
+|                      NULL |
+|                      NULL |
+|                      NULL |
+|                      NULL |
+|                      NULL |
+|                      NULL |
+|                      NULL |
+|                      NULL |
+|                      NULL |
++---------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select datediff(curdate(),DOB)/365 as dob from empl;
++---------+
+| dob     |
++---------+
+| 21.0849 |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
++---------+
+10 rows in set (0.00 sec)
+
+mysql> select datediff(curdate(),DOB)/365 as dob from empl;
++---------+
+| dob     |
++---------+
+| 21.0849 |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
+|    NULL |
++---------+
+10 rows in set (0.00 sec)
+
+mysql> select * from empl where ename like "_a%";
++-------+--------+--------+----------+--------+------------+
+| empid | empdpt | ename  | city     | salary | DOB        |
++-------+--------+--------+----------+--------+------------+
+|     1 | CSE    | Harsh  | Dehradun |  50000 | 1998-01-10 |
+|     2 | CSE    | Yash   | Dehradun |  50000 | NULL       |
+|     4 | IT     | Sachin | Dehradun |  65000 | NULL       |
+|    10 | Civil  | Hardik | Dehradun |  55000 | NULL       |
++-------+--------+--------+----------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from empl where ename like "b%" or like "%h";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like "%h"' at line 1
+mysql> select * from empl where ename like "b%" or ename like "%h";
++-------+--------+---------+----------+--------+------------+
+| empid | empdpt | ename   | city     | salary | DOB        |
++-------+--------+---------+----------+--------+------------+
+|     1 | CSE    | Harsh   | Dehradun |  50000 | 1998-01-10 |
+|     2 | CSE    | Yash    | Dehradun |  50000 | NULL       |
+|     5 | IT     | Anish   | Dehradun |  65000 | NULL       |
+|     9 | Civil  | Devansh | Dehradun |  55000 | NULL       |
++-------+--------+---------+----------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from empl where ename like "a%" or ename like "%h";
++-------+--------+---------+----------+--------+------------+
+| empid | empdpt | ename   | city     | salary | DOB        |
++-------+--------+---------+----------+--------+------------+
+|     1 | CSE    | Harsh   | Dehradun |  50000 | 1998-01-10 |
+|     2 | CSE    | Yash    | Dehradun |  50000 | NULL       |
+|     5 | IT     | Anish   | Dehradun |  65000 | NULL       |
+|     9 | Civil  | Devansh | Dehradun |  55000 | NULL       |
++-------+--------+---------+----------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from empl where ename like "a%" and ename like "%h";
++-------+--------+-------+----------+--------+------+
+| empid | empdpt | ename | city     | salary | DOB  |
++-------+--------+-------+----------+--------+------+
+|     5 | IT     | Anish | Dehradun |  65000 | NULL |
++-------+--------+-------+----------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from empl where ename like "_a%_h";
++-------+--------+-------+----------+--------+------------+
+| empid | empdpt | ename | city     | salary | DOB        |
++-------+--------+-------+----------+--------+------------+
+|     1 | CSE    | Harsh | Dehradun |  50000 | 1998-01-10 |
+|     2 | CSE    | Yash  | Dehradun |  50000 | NULL       |
++-------+--------+-------+----------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from empl where ename like "_a_%_h";
++-------+--------+-------+----------+--------+------------+
+| empid | empdpt | ename | city     | salary | DOB        |
++-------+--------+-------+----------+--------+------------+
+|     1 | CSE    | Harsh | Dehradun |  50000 | 1998-01-10 |
++-------+--------+-------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from empl where ename like "_e_%_h";
++-------+--------+---------+----------+--------+------+
+| empid | empdpt | ename   | city     | salary | DOB  |
++-------+--------+---------+----------+--------+------+
+|     9 | Civil  | Devansh | Dehradun |  55000 | NULL |
++-------+--------+---------+----------+--------+------+
+1 row in set (0.00 sec)
+
+mysql>
