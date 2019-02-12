@@ -1,0 +1,299 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.11 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show tables
+    -> ;
+ERROR 1046 (3D000): No database selected
+mysql> show table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> show tables;
+ERROR 1046 (3D000): No database selected
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| akshat             |
+| information_schema |
+| lib                |
+| maanas             |
+| mysql              |
++--------------------+
+5 rows in set (0.06 sec)
+
+mysql> use mysql;
+Database changed
+mysql> show tables;
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| columns_priv              |
+| component                 |
+| db                        |
+| default_roles             |
+| empl                      |
+| engine_cost               |
+| func                      |
+| general_log               |
+| global_grants             |
+| gtid_executed             |
+| help_category             |
+| help_keyword              |
+| help_relation             |
+| help_topic                |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| password_history          |
+| plugin                    |
+| procs_priv                |
+| proxies_priv              |
+| role_edges                |
+| server_cost               |
+| servers                   |
+| slave_master_info         |
+| slave_relay_log_info      |
+| slave_worker_info         |
+| slow_log                  |
+| tables_priv               |
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
+| user                      |
++---------------------------+
+34 rows in set (0.05 sec)
+
+mysql> create table doctor(id int, name varchar(20), city varchar(20), salary int, dept varchar(20));
+Query OK, 0 rows affected (0.54 sec)
+
+mysql> insert into doctor values(101,"Dr. Prateek Sinha","Yogi ka shahar",60000,"Neurosurgeon");
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into doctor values(102,"Dr. Nakul Sinha","Yogi ka shahar",65000,"surgeon");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into doctor values(103,"Dr. Kiran","(-_-)",35000,"Psycho");
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into doctor values(104,"Dr. Sandeep","Mumbai",100000,"Brain specialist");
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into doctor values(105,"Dr. A.K Singh","Mumbai",150000,"Heart specialist");
+Query OK, 1 row affected (0.15 sec)
+
+mysql> slect * from doctor;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'slect * from doctor' at line 1
+mysql> select * from doctor;
++------+-------------------+----------------+--------+------------------+
+| id   | name              | city           | salary | dept             |
++------+-------------------+----------------+--------+------------------+
+|  101 | Dr. Prateek Sinha | Yogi ka shahar |  60000 | Neurosurgeon     |
+|  102 | Dr. Nakul Sinha   | Yogi ka shahar |  65000 | surgeon          |
+|  103 | Dr. Kiran         | (-_-)          |  35000 | Psycho           |
+|  104 | Dr. Sandeep       | Mumbai         | 100000 | Brain specialist |
+|  105 | Dr. A.K Singh     | Mumbai         | 150000 | Heart specialist |
++------+-------------------+----------------+--------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table doctor add colimn DOB date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DOB date' at line 1
+mysql> alter table doctor add colimn DOB Date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DOB Date' at line 1
+mysql> alter table doctor add column DOB Date;
+Query OK, 0 rows affected (0.91 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update doctor set DOB=
+    -> "1995-06-11"
+    -> where id=101l;
+ERROR 1054 (42S22): Unknown column '101l' in 'where clause'
+mysql> where id=101;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id=101' at line 1
+mysql> update doctor set DOB=
+    -> "1995-06-11"
+    -> where id=101;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from doctor;
++------+-------------------+----------------+--------+------------------+------------+
+| id   | name              | city           | salary | dept             | DOB        |
++------+-------------------+----------------+--------+------------------+------------+
+|  101 | Dr. Prateek Sinha | Yogi ka shahar |  60000 | Neurosurgeon     | 1995-06-11 |
+|  102 | Dr. Nakul Sinha   | Yogi ka shahar |  65000 | surgeon          | NULL       |
+|  103 | Dr. Kiran         | (-_-)          |  35000 | Psycho           | NULL       |
+|  104 | Dr. Sandeep       | Mumbai         | 100000 | Brain specialist | NULL       |
+|  105 | Dr. A.K Singh     | Mumbai         | 150000 | Heart specialist | NULL       |
++------+-------------------+----------------+--------+------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> update doctor set DOB="1965-01-02" where id=102;
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update doctor set DOB="1975-10-12" where id=103;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update doctor set DOB="1968-25-05" where id=103;
+ERROR 1292 (22007): Incorrect date value: '1968-25-05' for column 'DOB' at row 3
+mysql> update doctor set DOB="1968-05-25" where id=104;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update doctor set DOB="1968-05-25" where id=105;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from doctor;
++------+-------------------+----------------+--------+------------------+------------+
+| id   | name              | city           | salary | dept             | DOB        |
++------+-------------------+----------------+--------+------------------+------------+
+|  101 | Dr. Prateek Sinha | Yogi ka shahar |  60000 | Neurosurgeon     | 1995-06-11 |
+|  102 | Dr. Nakul Sinha   | Yogi ka shahar |  65000 | surgeon          | 1965-01-02 |
+|  103 | Dr. Kiran         | (-_-)          |  35000 | Psycho           | 1975-10-12 |
+|  104 | Dr. Sandeep       | Mumbai         | 100000 | Brain specialist | 1968-05-25 |
+|  105 | Dr. A.K Singh     | Mumbai         | 150000 | Heart specialist | 1968-05-25 |
++------+-------------------+----------------+--------+------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from doctor order by salary;
++------+-------------------+----------------+--------+------------------+------------+
+| id   | name              | city           | salary | dept             | DOB        |
++------+-------------------+----------------+--------+------------------+------------+
+|  103 | Dr. Kiran         | (-_-)          |  35000 | Psycho           | 1975-10-12 |
+|  101 | Dr. Prateek Sinha | Yogi ka shahar |  60000 | Neurosurgeon     | 1995-06-11 |
+|  102 | Dr. Nakul Sinha   | Yogi ka shahar |  65000 | surgeon          | 1965-01-02 |
+|  104 | Dr. Sandeep       | Mumbai         | 100000 | Brain specialist | 1968-05-25 |
+|  105 | Dr. A.K Singh     | Mumbai         | 150000 | Heart specialist | 1968-05-25 |
++------+-------------------+----------------+--------+------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from doctor where salary<(select max(salary) from doctor);
++------+-------------------+----------------+--------+------------------+------------+
+| id   | name              | city           | salary | dept             | DOB        |
++------+-------------------+----------------+--------+------------------+------------+
+|  101 | Dr. Prateek Sinha | Yogi ka shahar |  60000 | Neurosurgeon     | 1995-06-11 |
+|  102 | Dr. Nakul Sinha   | Yogi ka shahar |  65000 | surgeon          | 1965-01-02 |
+|  103 | Dr. Kiran         | (-_-)          |  35000 | Psycho           | 1975-10-12 |
+|  104 | Dr. Sandeep       | Mumbai         | 100000 | Brain specialist | 1968-05-25 |
++------+-------------------+----------------+--------+------------------+------------+
+4 rows in set (0.01 sec)
+
+mysql> select max(salary) from doctor where salary<(select max(salary) from doctor);
++-------------+
+| max(salary) |
++-------------+
+|      100000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary),* from doctor where salary<(select max(salary) from doctor);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from doctor where salary<(select max(salary) from doctor)' at line 1
+mysql> select max(salary),name from doctor where salary<(select max(salary) from doctor);
++-------------+-------------------+
+| max(salary) | name              |
++-------------+-------------------+
+|      100000 | Dr. Prateek Sinha |
++-------------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> select name,max(salary) from doctor where salary<(select max(salary) from doctor);
++-------------------+-------------+
+| name              | max(salary) |
++-------------------+-------------+
+| Dr. Prateek Sinha |      100000 |
++-------------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select name,max(salary) from doctor where salary<(select min(salary) from doctor);
++------+-------------+
+| name | max(salary) |
++------+-------------+
+| NULL |        NULL |
++------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select name,min(salary) from doctor where salary<(select min(salary) from doctor);
++------+-------------+
+| name | min(salary) |
++------+-------------+
+| NULL |        NULL |
++------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select name,min(salary) from doctor where salary<(select max(salary) from doctor);
++-------------------+-------------+
+| name              | min(salary) |
++-------------------+-------------+
+| Dr. Prateek Sinha |       35000 |
++-------------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select name,min(salary) from doctor where salary>(select min(salary) from doctor);
++-------------------+-------------+
+| name              | min(salary) |
++-------------------+-------------+
+| Dr. Prateek Sinha |       60000 |
++-------------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select name,max(salary) from doctor where salary<(select max(salary) from doctor);
++-------------------+-------------+
+| name              | max(salary) |
++-------------------+-------------+
+| Dr. Prateek Sinha |      100000 |
++-------------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from doctor;
++------+-------------------+----------------+--------+------------------+------------+
+| id   | name              | city           | salary | dept             | DOB        |
++------+-------------------+----------------+--------+------------------+------------+
+|  101 | Dr. Prateek Sinha | Yogi ka shahar |  60000 | Neurosurgeon     | 1995-06-11 |
+|  102 | Dr. Nakul Sinha   | Yogi ka shahar |  65000 | surgeon          | 1965-01-02 |
+|  103 | Dr. Kiran         | (-_-)          |  35000 | Psycho           | 1975-10-12 |
+|  104 | Dr. Sandeep       | Mumbai         | 100000 | Brain specialist | 1968-05-25 |
+|  105 | Dr. A.K Singh     | Mumbai         | 150000 | Heart specialist | 1968-05-25 |
++------+-------------------+----------------+--------+------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select id,max(salary) from doctor where salary<(select max(salary) from doctor);
++------+-------------+
+| id   | max(salary) |
++------+-------------+
+|  101 |      100000 |
++------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select salary from doctor order by salary desc limit 1,1;
++--------+
+| salary |
++--------+
+| 100000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select salary from doctor order by salary asc limit 1,1;
++--------+
+| salary |
++--------+
+|  60000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> alter table doctor rename to doc;
+Query OK, 0 rows affected (0.36 sec)
+
+mysql>
