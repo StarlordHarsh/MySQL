@@ -1,0 +1,304 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 44
+Server version: 8.0.11 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| arpit              |
+| information_schema |
+| itbdb              |
+| kartikey           |
+| kunal              |
+| mysql              |
+| performance_schema |
+| sachin             |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use sachin
+Database changed
+mysql> create table Empdet(id int, city varchar(20), name varchar(30), salary int, email varchar(30));
+Query OK, 0 rows affected (0.43 sec)
+
+mysql> insert into empdet values(1,"Gorakhpur","Random Stranger 1",50000,"hj101998@gmail.com");
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into empdet values(2,"Bombay","Random Stranger 2",65000,"randstrand@gmail.com");
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into empdet values(2,"cant see","John Cena",115000,"jc@gmail.com");
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select * from empdet;
++------+-----------+-------------------+--------+----------------------+
+| id   | city      | name              | salary | email                |
++------+-----------+-------------------+--------+----------------------+
+|    1 | Gorakhpur | Random Stranger 1 |  50000 | hj101998@gmail.com   |
+|    2 | Bombay    | Random Stranger 2 |  65000 | randstrand@gmail.com |
+|    2 | cant see  | John Cena         | 115000 | jc@gmail.com         |
++------+-----------+-------------------+--------+----------------------+
+3 rows in set (0.00 sec)
+
+mysql> update empdet set id=3 where name="John Cena";
+Query OK, 1 row affected (0.18 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from empdet;
++------+-----------+-------------------+--------+----------------------+
+| id   | city      | name              | salary | email                |
++------+-----------+-------------------+--------+----------------------+
+|    1 | Gorakhpur | Random Stranger 1 |  50000 | hj101998@gmail.com   |
+|    2 | Bombay    | Random Stranger 2 |  65000 | randstrand@gmail.com |
+|    3 | cant see  | John Cena         | 115000 | jc@gmail.com         |
++------+-----------+-------------------+--------+----------------------+
+3 rows in set (0.02 sec)
+
+mysql> alter table empdet add column dept varchar(40);
+Query OK, 0 rows affected (1.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update empdet set dep="CS" where id=1,2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',2' at line 1
+mysql> update empdet set dep="CS" where id=1 or id=2;
+ERROR 1054 (42S22): Unknown column 'dep' in 'field list'
+mysql> update empdet set dept="CS" where id=1 or id=2;
+Query OK, 2 rows affected (0.10 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from empdet;
++------+-----------+-------------------+--------+----------------------+------+
+| id   | city      | name              | salary | email                | dept |
++------+-----------+-------------------+--------+----------------------+------+
+|    1 | Gorakhpur | Random Stranger 1 |  50000 | hj101998@gmail.com   | CS   |
+|    2 | Bombay    | Random Stranger 2 |  65000 | randstrand@gmail.com | CS   |
+|    3 | cant see  | John Cena         | 115000 | jc@gmail.com         | NULL |
++------+-----------+-------------------+--------+----------------------+------+
+3 rows in set (0.00 sec)
+
+mysql> update empdet set dept="You can't see me" where id=3;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from empdet;
++------+-----------+-------------------+--------+----------------------+------------------+
+| id   | city      | name              | salary | email                | dept             |
++------+-----------+-------------------+--------+----------------------+------------------+
+|    1 | Gorakhpur | Random Stranger 1 |  50000 | hj101998@gmail.com   | CS               |
+|    2 | Bombay    | Random Stranger 2 |  65000 | randstrand@gmail.com | CS               |
+|    3 | cant see  | John Cena         | 115000 | jc@gmail.com         | You can't see me |
++------+-----------+-------------------+--------+----------------------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from empdet where email like 'hj%';
++------+-----------+-------------------+--------+--------------------+------+
+| id   | city      | name              | salary | email              | dept |
++------+-----------+-------------------+--------+--------------------+------+
+|    1 | Gorakhpur | Random Stranger 1 |  50000 | hj101998@gmail.com | CS   |
++------+-----------+-------------------+--------+--------------------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from empdet where email like '_a%';
++------+--------+-------------------+--------+----------------------+------+
+| id   | city   | name              | salary | email                | dept |
++------+--------+-------------------+--------+----------------------+------+
+|    2 | Bombay | Random Stranger 2 |  65000 | randstrand@gmail.com | CS   |
++------+--------+-------------------+--------+----------------------+------+
+1 row in set (0.00 sec)
+
+mysql> select sum(salary) from empdet;
++-------------+
+| sum(salary) |
++-------------+
+|      230000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(salary) from empdet;
++-------------+
+| avg(salary) |
++-------------+
+|  76666.6667 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) from empdet;
++-------------+
+| min(salary) |
++-------------+
+|       50000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from empdet;
++-------------+
+| max(salary) |
++-------------+
+|      115000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> insert into empdet values(4,"Mirzapur","Munna bhaiya",55000,"mbmirza@gmail.com");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into empdet values(4,"Mirzapur","Munna bhaiya",55000,"mbmirza@gmail.com","IT");
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into empdet values(5,"Johnpur","Bablu bhaiya",51000,"babu@gmail.com","IT");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into empdet values(6,"Baba","Babu ",90000,"babubh@gmail.com","Civil");
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from empdet;
++------+-----------+-------------------+--------+----------------------+------------------+
+| id   | city      | name              | salary | email                | dept             |
++------+-----------+-------------------+--------+----------------------+------------------+
+|    1 | Gorakhpur | Random Stranger 1 |  50000 | hj101998@gmail.com   | CS               |
+|    2 | Bombay    | Random Stranger 2 |  65000 | randstrand@gmail.com | CS               |
+|    3 | cant see  | John Cena         | 115000 | jc@gmail.com         | You can't see me |
+|    4 | Mirzapur  | Munna bhaiya      |  55000 | mbmirza@gmail.com    | IT               |
+|    5 | Johnpur   | Bablu bhaiya      |  51000 | babu@gmail.com       | IT               |
+|    6 | Baba      | Babu              |  90000 | babubh@gmail.com     | Civil            |
++------+-----------+-------------------+--------+----------------------+------------------+
+6 rows in set (0.00 sec)
+
+mysql> select sum(salary) from empdet where dept="CS";
++-------------+
+| sum(salary) |
++-------------+
+|      115000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from empdet where dept="CS";
++-------------+
+| avg(salary) |
++-------------+
+|  57500.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from empdet orderby salary;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'salary' at line 1
+mysql> select * from empdet order by salary;
++------+-----------+-------------------+--------+----------------------+------------------+
+| id   | city      | name              | salary | email                | dept             |
++------+-----------+-------------------+--------+----------------------+------------------+
+|    1 | Gorakhpur | Random Stranger 1 |  50000 | hj101998@gmail.com   | CS               |
+|    5 | Johnpur   | Bablu bhaiya      |  51000 | babu@gmail.com       | IT               |
+|    4 | Mirzapur  | Munna bhaiya      |  55000 | mbmirza@gmail.com    | IT               |
+|    2 | Bombay    | Random Stranger 2 |  65000 | randstrand@gmail.com | CS               |
+|    6 | Baba      | Babu              |  90000 | babubh@gmail.com     | Civil            |
+|    3 | cant see  | John Cena         | 115000 | jc@gmail.com         | You can't see me |
++------+-----------+-------------------+--------+----------------------+------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from empdet;
++------+-----------+-------------------+--------+----------------------+------------------+
+| id   | city      | name              | salary | email                | dept             |
++------+-----------+-------------------+--------+----------------------+------------------+
+|    1 | Gorakhpur | Random Stranger 1 |  50000 | hj101998@gmail.com   | CS               |
+|    2 | Bombay    | Random Stranger 2 |  65000 | randstrand@gmail.com | CS               |
+|    3 | cant see  | John Cena         | 115000 | jc@gmail.com         | You can't see me |
+|    4 | Mirzapur  | Munna bhaiya      |  55000 | mbmirza@gmail.com    | IT               |
+|    5 | Johnpur   | Bablu bhaiya      |  51000 | babu@gmail.com       | IT               |
+|    6 | Baba      | Babu              |  90000 | babubh@gmail.com     | Civil            |
++------+-----------+-------------------+--------+----------------------+------------------+
+6 rows in set (0.00 sec)
+
+mysql> select sum(salary),dept from emdet group by dept;
+ERROR 1146 (42S02): Table 'sachin.emdet' doesn't exist
+mysql> select sum(salary),dept from empdet group by dept;
++-------------+------------------+
+| sum(salary) | dept             |
++-------------+------------------+
+|      115000 | CS               |
+|      115000 | You can't see me |
+|      106000 | IT               |
+|       90000 | Civil            |
++-------------+------------------+
+4 rows in set (0.01 sec)
+
+mysql> select salary,dept from empdet group by dept;
++--------+------------------+
+| salary | dept             |
++--------+------------------+
+|  50000 | CS               |
+| 115000 | You can't see me |
+|  55000 | IT               |
+|  90000 | Civil            |
++--------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> select avg(salary),dept from empdet group by dept;
++-------------+------------------+
+| avg(salary) | dept             |
++-------------+------------------+
+|  57500.0000 | CS               |
+| 115000.0000 | You can't see me |
+|  53000.0000 | IT               |
+|  90000.0000 | Civil            |
++-------------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> select max(salary),dept from empdet group by dept;
++-------------+------------------+
+| max(salary) | dept             |
++-------------+------------------+
+|       65000 | CS               |
+|      115000 | You can't see me |
+|       55000 | IT               |
+|       90000 | Civil            |
++-------------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> select dept where salary >(select avg(salary));
+ERROR 1054 (42S22): Unknown column 'dept' in 'field list'
+mysql> select dept where salary >(select avg(salary) from empdet);
+ERROR 1054 (42S22): Unknown column 'dept' in 'field list'
+mysql> select dept from epdet where salary >(select avg(salary) from empdet);
+ERROR 1146 (42S02): Table 'sachin.epdet' doesn't exist
+mysql> select dept from empdet where salary >(select avg(salary) from empdet);
++------------------+
+| dept             |
++------------------+
+| You can't see me |
+| Civil            |
++------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from empdet where salary >(select avg(salary) from empdet);
++------+----------+-----------+--------+------------------+------------------+
+| id   | city     | name      | salary | email            | dept             |
++------+----------+-----------+--------+------------------+------------------+
+|    3 | cant see | John Cena | 115000 | jc@gmail.com     | You can't see me |
+|    6 | Baba     | Babu      |  90000 | babubh@gmail.com | Civil            |
++------+----------+-----------+--------+------------------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> select avg(salary),dept from empdet group by dept;
++-------------+------------------+
+| avg(salary) | dept             |
++-------------+------------------+
+|  57500.0000 | CS               |
+| 115000.0000 | You can't see me |
+|  53000.0000 | IT               |
+|  90000.0000 | Civil            |
++-------------+------------------+
+4 rows in set (0.00 sec)
+
+mysql>
