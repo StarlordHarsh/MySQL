@@ -1,0 +1,351 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.11 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use databases;
+ERROR 1049 (42000): Unknown database 'databases'
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aamir              |
+| anish              |
+| harsh              |
+| information_schema |
+| itbdb              |
+| mysql              |
+| nitin              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use harsh;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_harsh |
++-----------------+
+| manager         |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> create table cust(no int, name varchar(20), ordid int,city varchar(20);)
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+    -> create table cust(no int, name varchar(20), ordid int,city varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+create table cust(no int, name varchar(20), ordid int,city varchar(20))' at line 1
+mysql> create table cust(no int, name varchar(20), ordid int,city varchar(20));
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> create table order(ordid int, orditem varchar(20),orddate date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(ordid int, orditem varchar(20),orddate date)' at line 1
+mysql> create table orders(ordid int, orditem varchar(20),orddate date);
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> insert into customer values(101,"Divyam Pant",001,"Dehradun");
+ERROR 1146 (42S02): Table 'harsh.customer' doesn't exist
+mysql> insert into cust values(101,"Divyam Pant",001,"Dehradun");
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into cust values(102,"Sachin Pant",002,"Dehradun");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into cust values(103,"Rish Pant",003,"Delhi");
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into orders values(001,"Bournvita","2019-03-12");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into orders values(002,"Basketball","2019-03-10");
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into orders values(002,"Bask","2019-03-09");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> alter table cust add primary key(no);
+Query OK, 0 rows affected (0.89 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> rename orders to ord;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'orders to ord' at line 1
+mysql> desc cust;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| ordid | int(11)     | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.06 sec)
+
+mysql> desc orders;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ordid   | int(11)     | YES  |     | NULL    |       |
+| orditem | varchar(20) | YES  |     | NULL    |       |
+| orddate | date        | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from cust;
++-----+-------------+-------+----------+
+| no  | name        | ordid | city     |
++-----+-------------+-------+----------+
+| 101 | Divyam Pant |     1 | Dehradun |
+| 102 | Sachin Pant |     2 | Dehradun |
+| 103 | Rish Pant   |     3 | Delhi    |
++-----+-------------+-------+----------+
+3 rows in set (0.02 sec)
+
+mysql> select * from orders;
++-------+------------+------------+
+| ordid | orditem    | orddate    |
++-------+------------+------------+
+|     1 | Bournvita  | 2019-03-12 |
+|     2 | Basketball | 2019-03-10 |
+|     2 | Bask       | 2019-03-09 |
++-------+------------+------------+
+3 rows in set (0.01 sec)
+
+mysql> update orders set ordid=3 where orditem="Bask";
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from orders;
++-------+------------+------------+
+| ordid | orditem    | orddate    |
++-------+------------+------------+
+|     1 | Bournvita  | 2019-03-12 |
+|     2 | Basketball | 2019-03-10 |
+|     3 | Bask       | 2019-03-09 |
++-------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select name , orditem from cust,orders where cust.ordid=orders.ordid;
++-------------+------------+
+| name        | orditem    |
++-------------+------------+
+| Divyam Pant | Bournvita  |
+| Sachin Pant | Basketball |
+| Rish Pant   | Bask       |
++-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into orders values(002,"ice cream","2019-03-09");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into orders values(002,"ice pack","2019-03-09");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into orders values(001,"ice pack","2019-03-09");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into orders values(001,"Ashirwaad atta","2019-03-09");
+Query OK, 1 row affected (0.15 sec)
+
+mysql> select name , orditem from cust,orders where cust.ordid=orders.ordid;
++-------------+----------------+
+| name        | orditem        |
++-------------+----------------+
+| Divyam Pant | Bournvita      |
+| Sachin Pant | Basketball     |
+| Rish Pant   | Bask           |
+| Sachin Pant | ice cream      |
+| Sachin Pant | ice pack       |
+| Divyam Pant | ice pack       |
+| Divyam Pant | Ashirwaad atta |
++-------------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from orders;
++-------+----------------+------------+
+| ordid | orditem        | orddate    |
++-------+----------------+------------+
+|     1 | Bournvita      | 2019-03-12 |
+|     2 | Basketball     | 2019-03-10 |
+|     3 | Bask           | 2019-03-09 |
+|     2 | ice cream      | 2019-03-09 |
+|     2 | ice pack       | 2019-03-09 |
+|     1 | ice pack       | 2019-03-09 |
+|     1 | Ashirwaad atta | 2019-03-09 |
++-------+----------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from orders order by ordid;;
++-------+----------------+------------+
+| ordid | orditem        | orddate    |
++-------+----------------+------------+
+|     1 | Bournvita      | 2019-03-12 |
+|     1 | ice pack       | 2019-03-09 |
+|     1 | Ashirwaad atta | 2019-03-09 |
+|     2 | Basketball     | 2019-03-10 |
+|     2 | ice cream      | 2019-03-09 |
+|     2 | ice pack       | 2019-03-09 |
+|     3 | Bask           | 2019-03-09 |
++-------+----------------+------------+
+7 rows in set (0.00 sec)
+
+ERROR:
+No query specified
+
+mysql> select * from orders;
++-------+----------------+------------+
+| ordid | orditem        | orddate    |
++-------+----------------+------------+
+|     1 | Bournvita      | 2019-03-12 |
+|     2 | Basketball     | 2019-03-10 |
+|     3 | Bask           | 2019-03-09 |
+|     2 | ice cream      | 2019-03-09 |
+|     2 | ice pack       | 2019-03-09 |
+|     1 | ice pack       | 2019-03-09 |
+|     1 | Ashirwaad atta | 2019-03-09 |
++-------+----------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select name , orditem from cust,orders where cust.ordid=orders.ordid order by ordid;
+ERROR 1052 (23000): Column 'ordid' in order clause is ambiguous
+mysql> alter table cust add column age int check(age>=18);
+Query OK, 0 rows affected (1.25 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update cust set age=18 where ordid=1;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update cust set age=17 where ordid=1;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cust;
++-----+-------------+-------+----------+------+
+| no  | name        | ordid | city     | age  |
++-----+-------------+-------+----------+------+
+| 101 | Divyam Pant |     1 | Dehradun |   17 |
+| 102 | Sachin Pant |     2 | Dehradun | NULL |
+| 103 | Rish Pant   |     3 | Delhi    | NULL |
++-----+-------------+-------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> update cust set age=18 where ordid=2;
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cust;
++-----+-------------+-------+----------+------+
+| no  | name        | ordid | city     | age  |
++-----+-------------+-------+----------+------+
+| 101 | Divyam Pant |     1 | Dehradun |   17 |
+| 102 | Sachin Pant |     2 | Dehradun |   18 |
+| 103 | Rish Pant   |     3 | Delhi    | NULL |
++-----+-------------+-------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> select name , orditem,ordid from cust,orders where cust.ordid=orders.ordid;
+ERROR 1052 (23000): Column 'ordid' in field list is ambiguous
+mysql> select name , orditem from cust,orders where cust.ordid=orders.ordid;
++-------------+----------------+
+| name        | orditem        |
++-------------+----------------+
+| Divyam Pant | Bournvita      |
+| Sachin Pant | Basketball     |
+| Rish Pant   | Bask           |
+| Sachin Pant | ice cream      |
+| Sachin Pant | ice pack       |
+| Divyam Pant | ice pack       |
+| Divyam Pant | Ashirwaad atta |
++-------------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> select name , orditem,cust.ordid from cust,orders where cust.ordid=orders.ordid;
++-------------+----------------+-------+
+| name        | orditem        | ordid |
++-------------+----------------+-------+
+| Divyam Pant | Bournvita      |     1 |
+| Sachin Pant | Basketball     |     2 |
+| Rish Pant   | Bask           |     3 |
+| Sachin Pant | ice cream      |     2 |
+| Sachin Pant | ice pack       |     2 |
+| Divyam Pant | ice pack       |     1 |
+| Divyam Pant | Ashirwaad atta |     1 |
++-------------+----------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select name , orditem from cust join orders,orders where cust.ordid=orders.ordid;
+ERROR 1066 (42000): Not unique table/alias: 'orders'
+mysql> select name , orditem from cust join orders where cust.ordid=orders.ordid;
++-------------+----------------+
+| name        | orditem        |
++-------------+----------------+
+| Divyam Pant | Bournvita      |
+| Sachin Pant | Basketball     |
+| Rish Pant   | Bask           |
+| Sachin Pant | ice cream      |
+| Sachin Pant | ice pack       |
+| Divyam Pant | ice pack       |
+| Divyam Pant | Ashirwaad atta |
++-------------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> select name , orditem from cust join orders;
++-------------+----------------+
+| name        | orditem        |
++-------------+----------------+
+| Divyam Pant | Bournvita      |
+| Sachin Pant | Bournvita      |
+| Rish Pant   | Bournvita      |
+| Divyam Pant | Basketball     |
+| Sachin Pant | Basketball     |
+| Rish Pant   | Basketball     |
+| Divyam Pant | Bask           |
+| Sachin Pant | Bask           |
+| Rish Pant   | Bask           |
+| Divyam Pant | ice cream      |
+| Sachin Pant | ice cream      |
+| Rish Pant   | ice cream      |
+| Divyam Pant | ice pack       |
+| Sachin Pant | ice pack       |
+| Rish Pant   | ice pack       |
+| Divyam Pant | ice pack       |
+| Sachin Pant | ice pack       |
+| Rish Pant   | ice pack       |
+| Divyam Pant | Ashirwaad atta |
+| Sachin Pant | Ashirwaad atta |
+| Rish Pant   | Ashirwaad atta |
++-------------+----------------+
+21 rows in set (0.00 sec)
+
+mysql> select name , orditem from cust natural join orders;
++-------------+----------------+
+| name        | orditem        |
++-------------+----------------+
+| Divyam Pant | Bournvita      |
+| Sachin Pant | Basketball     |
+| Rish Pant   | Bask           |
+| Sachin Pant | ice cream      |
+| Sachin Pant | ice pack       |
+| Divyam Pant | ice pack       |
+| Divyam Pant | Ashirwaad atta |
++-------------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> select name , orditem from cust left join orders;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select name , orditem from cust left join orders where cust.ordid=orders.ordid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where cust.ordid=orders.ordid' at line 1
+mysql> select name , orditem from cust leftjoin orders where cust.ordid=orders.ordid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'orders where cust.ordid=orders.ordid' at line 1
+mysql>
