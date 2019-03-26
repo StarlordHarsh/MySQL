@@ -51,4 +51,50 @@ Query OK, 0 rows affected (0.40 sec)
 mysql> create table apply(sID int, cName varchar(10), major varchar(20), decission char);
 Query OK, 0 rows affected (0.43 sec)
 
-mysql>
+mysql> insert into Student values(123,"Amy",3.9,1000,"1998-06-26");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into Student values(234,"Bob",3.6,1500,"1995-04-07");
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into Student values(345,"Craig",3.5,500,"1997-07-24");
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into Student values(345,"Doris",3.9,1000,"1997-07-24");
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into Student values(456,"Doris",3.9,1000,"1997-07-24");
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into Student values(567,"Edward",2.9,2000,"1996-12-21");
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into Student values(678,"Fay",3.8,200,"1996-08-27");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into Student values(789,"Gary",3.4,800,"1996-10-08");
+Query OK, 1 row affected (0.19 sec)
+
+mysql> insert into Student values(987,"Helen",3.7,800,"1997-03-27");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into Student values(876,"Irene",3.9,400,"1996-03-27");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into Student values(765,"Jay",2.9,1500,"1998-08-08");
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into Student values(654,"Amy",3.9,1000,"1996-05-26");
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into Student values(543,"Craig",3.4,2000,"1998-08-27");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into College values("Stanford,"CA",15000);
+    ">
+    "> \c
+    "> ^C
+mysql> insert into college values("Stanford,"CA",15000);
+    "> ^C
+mysql> insert into college values("Stanford,"CA",15000);
+    "> ^D
