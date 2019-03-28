@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<conio.h>
+int main()
+{
+    int count=0,a[10],newar[20],i,j,k,edit=0,l,trueone=0;
+    printf("Enter no of bits");
+    for(i=0;i<10;i++)
+    {
+        scanf("%d",&a[i]);
+        newar[i]=0;
+    }
+    i=0;
+    for(l=0;l<10;l++)
+    {
+
+        printf("%d\n",i);
+        if(a[i]==1 && a[i+1]==1 && a[i+2]==1 && a[i+3]==1 && a[i+4]==1)
+            {
+                //printf("trueone \n");
+                trueone=1;
+            for(j=0;j<10;j++)
+            {
+                //printf("running \n");//printf("%d = %d",newar[j],a[j]);//printf("\n");
+                newar[j]=a[j];
+                if (j==i+4)
+                {//printf("+1 \n");
+                    newar[j+1]=0;
+                    edit=1;
+                }
+                if (edit==1)
+                {//printf("edit \n");
+                    newar[j+2]=a[j];
+                }
+            }
+        }
+        else if(trueone==0)
+        {
+            printf("truein\n");
+            i++;
+        }
+}
+    for(i=0;i<10;i++)
+        printf("%d",newar[i]);
+}
