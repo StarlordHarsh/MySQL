@@ -71,4 +71,42 @@ mysql> alter table apply add FOREIGN KEY (cName) REFERENCES college ( cName );
 Query OK, 0 rows affected (1.28 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
+mysql> alter table apply alter column major varchar(25);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(25)' at line 1
+mysql> alter table apply modify column major varchar(25);
+Query OK, 0 rows affected (0.89 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table apply add decision varchar(3) not null;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc applu;
+ERROR 1146 (42S02): Table 'yash.applu' doesn't exist
+mysql> desc apply;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| sID      | int(11)     | NO   | PRI | 0       |       |
+| cName    | varchar(10) | NO   | PRI |         |       |
+| major    | varchar(25) | NO   | PRI |         |       |
+| decision | varchar(3)  | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> alter table apply modify decision char(1);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc apply;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| sID      | int(11)     | NO   | PRI | 0       |       |
+| cName    | varchar(10) | NO   | PRI |         |       |
+| major    | varchar(25) | NO   | PRI |         |       |
+| decision | char(1)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
 mysql>
